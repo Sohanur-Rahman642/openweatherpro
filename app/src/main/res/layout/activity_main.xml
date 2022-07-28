@@ -1,261 +1,34 @@
-<layout>
-    <data>
-        <variable
-            name="city"
-            type="com.example.openweathertest.model.City" />
-        />
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class="ActivityMainBinding">
     </data>
-
-
-    <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".view.MainActivity"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/content"
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
-            android:layout_height="320dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/sky_blue"
-
             >
-            <LinearLayout
-                android:id="@+id/location_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                >
-
-                <TextView
-                    android:id="@+id/city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="dhaka"
-                    android:textColor="@color/white"
-                    android:textSize="22dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    android:drawableStart="@drawable/ic_baseline_location_on_24"
-                    />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/weather_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/weather_list_view"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/location_layout"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                >
-                <LinearLayout
-                    android:id="@+id/image_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center"
-                    >
-                    <ImageView
-                        android:id="@+id/icon"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@mipmap/ic_launcher"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/daily_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/day"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Today"
-                        android:textColor="@color/white"
-                        android:textSize="22dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:gravity="center"
-                        />
-
-                    <TextView
-                        android:id="@+id/temp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="22^"
-                        android:textColor="@color/white"
-                        android:textSize="40dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:gravity="center"
-                        />
-
-                    <TextView
-                        android:id="@+id/main"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Rainy"
-                        android:textColor="@color/white"
-                        android:textSize="22dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:gravity="center"
-                        />
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="match_parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weather_content"
-                android:background="@color/white"
+                tools:listitem="@layout/item_list_view"
                 />
 
 
-            <LinearLayout
-                android:id="@+id/footer_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:weightSum="3"
-                >
-                <RelativeLayout
-                    android:id="@+id/speed_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    >
-
-                    <ImageView
-                        android:id="@+id/icon_speed_view"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/ic_launcher" />
-
-
-                    <TextView
-                        android:id="@+id/value_speed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/icon_speed_view"
-                        android:text="9 km/h"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:textColor="@color/white"
-                        android:textSize="14dp" />
-
-                    <TextView
-                        android:id="@+id/text_speed"
-                        android:layout_below="@+id/value_speed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Speed"
-                        android:textColor="@color/white"
-                        android:textSize="16dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/humidity_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    >
-
-                    <ImageView
-                        android:id="@+id/icon_humidity"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/ic_launcher"
-                        />
-
-
-                    <TextView
-                        android:id="@+id/value_humidity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/icon_humidity"
-                        android:text="31%"
-                        android:gravity="center"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:textColor="@color/white"
-                        android:textSize="14dp" />
-
-                    <TextView
-                        android:id="@+id/text_humidity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/value_humidity"
-                        android:text="Humidity"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:textColor="@color/white"
-                        android:textSize="16dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/pop_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    >
-
-                    <ImageView
-                        android:id="@+id/icon_pop"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/ic_launcher"
-                        />
-
-
-                    <TextView
-                        android:id="@+id/value_pop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/icon_pop"
-                        android:gravity="center"
-                        android:text="93%"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:textColor="@color/white"
-                        android:textSize="14dp" />
-
-                    <TextView
-                        android:id="@+id/text_pop"
-                        android:layout_below="@+id/value_pop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Chances of rain"
-                        android:textColor="@color/white"
-                        android:textSize="16dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:gravity="center"
-                        />
-                </RelativeLayout>
-
-
-            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

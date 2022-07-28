@@ -11,7 +11,9 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.work.Data;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
@@ -24,6 +26,7 @@ import com.example.openweathertest.worker.WeatherWorker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class WeatherListViewModel extends ViewModel {
 
@@ -39,29 +42,16 @@ public class WeatherListViewModel extends ViewModel {
     }
 
 
-    public void loadDataFromWorker(LifecycleOwner lifecycleOwner) {
-        OneTimeWorkRequest myWorkerReq = new OneTimeWorkRequest.Builder(WeatherWorker.class)
+
+    public void startPeriodicWorker(LifecycleOwner lifecycleOwner) {
+        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(WeatherWorker.class, 15, TimeUnit.MINUTES)
+                .addTag(TAG)
                 .build();
 
         WorkManager mWorkManager = WorkManager.getInstance();
-        mWorkManager
-                .beginWith(myWorkerReq)
-                .enqueue();
-
-        mWorkManager.getWorkInfoByIdLiveData(myWorkerReq.getId()).observe(lifecycleOwner, new Observer<WorkInfo>() {
-            @Override
-            public void onChanged(WorkInfo workInfo) {
-                if(workInfo.getState().isFinished()){
-                    Data output = workInfo.getOutputData();
-                    myLiveData.setValue(output.getString("MY_KEY_DATA_FROM_WORKER"));
-                }
-            }
-        });
+        mWorkManager.enqueueUniquePeriodicWork("Weather", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
     }
 
-    public MutableLiveData<String> getData() {
-        return myLiveData;
-    }
 
     public LiveData<List<DbWeatherList>> getListOfWeathers(){
         return weatherCacheRepository.getWeatherDataFromRoom();

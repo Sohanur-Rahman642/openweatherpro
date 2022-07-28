@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OpenWeatherTest</string>
+    <string name="formatter">%.1f</string>
 </resources>
