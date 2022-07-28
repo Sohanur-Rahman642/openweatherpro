@@ -44,7 +44,7 @@ public class WeatherListViewModel extends ViewModel {
 
 
     public void startPeriodicWorker(LifecycleOwner lifecycleOwner) {
-        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(WeatherWorker.class, 15, TimeUnit.MINUTES)
+        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(WeatherWorker.class, 12, TimeUnit.HOURS)
                 .addTag(TAG)
                 .build();
 

@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         observeWeatherForNotification();
 
     }
-    
+
 
     private void observeWeatherForNotification() {
         weatherListViewModel.getListOfWeathers().observe(this, dbWeatherLists -> {
